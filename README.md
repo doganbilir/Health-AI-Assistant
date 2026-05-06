@@ -1,97 +1,57 @@
-# Sağlık Asistanı
 
-Yapay zeka tabanlı sağlık asistanı web uygulaması. Kullanıcıların belirttiği semptomlara dayalı olarak hastalıklar hakkında bilgi veren ve tedavi önerileri sunan bir platform.
 
-## Proje Hakkında
+Health Care AI Assistant
+About The Project
+This project is a web-based bilingual health assistant that leverages OpenAI’s GPT-3.5 Turbo model to help users evaluate their symptoms. Users can input their symptoms via text or voice, and the system provides structured health advice, including possible medical conditions, recommended actions, and mandatory legal disclaimers.
 
-Bu platform, kullanıcıların semptomlarını girerek olası hastalıklar hakkında bilgi almalarını sağlar. Yapay zeka modeli, girilen semptomları analiz ederek olası hastalıkları listeler ve tedavi önerileri sunar.
 
-**Not:** Bu uygulama, sağlık bilgilendirme amacı güder ve teşhis koymayı amaçlamaz. Yalnızca kullanıcıların sağlık sorunlarına dair temel rehberlik sağlar.
+Developed as a graduation thesis at Çukurova University , this assistant bridges the gap in accessing clear, verified, and user-friendly medical information. To ensure high-quality and culturally accurate responses, the underlying language model was fine-tuned using a custom dataset of 100 curated medical simulation examples.
 
-## Özellikler
+![Application Input Screen](images/picture1.png)
 
-- Semptom analizi
-- Olası hastalıklar listesi
-- Tedavi önerileri
-- Kullanıcı dostu arayüz
-- Tamamen responsive tasarım
-- Modern ve kolay kullanım
+![AI Analysis Results](images/picture2.png)
 
-## Teknolojiler
+![Symptom History Charts](images/picture3.png)
+Key Features
+	•	Bilingual Support: The application dynamically accepts and processes inputs in both Turkish and English, producing responses that match the user's input language.
+	•	Voice Input: Integrated Web Speech API allows users to interact with the system via voice commands, improving accessibility.
+	•	Structured & Safe AI Outputs: Utilizing OpenAI's function calling capability, the AI generates predictable, structured JSON responses, preventing hallucinated or disorganized outputs.
+	•	Health History Management: Authenticated users can save their interactions securely in the cloud. Each analysis outcome, including the original symptom and AI response, is stored with a timestamp.
+	•	Data Visualization: The dashboard uses interactive line charts to display symptom trends over time, helping users track recurring health patterns like headaches or nausea.
+	•	Ethical AI Implementation: The system is strictly prohibited from making direct medical diagnoses and automatically embeds mandatory medical disclaimers in all outputs and UI elements.
+Tech Stack
+	•	Frontend: React.js, TypeScript 
+	•	Styling & Animation: Tailwind CSS, Framer Motion 
+	•	Backend & Database: Firebase Authentication, Cloud Firestore 
+	•	AI Integration: OpenAI API (Fine-tuned GPT-3.5 Turbo) 
+	•	Data Visualization: Recharts 
+Architecture Overview
+The application operates on a modern client-server architecture. The React-based frontend connects to Firebase for secure user authentication and NoSQL data storage. For symptom analysis, a dedicated service layer (openaiService.ts) handles communication with the OpenAI API. This layer enforces structured outputs via a specific symptom_analysis function schema, ensuring the extraction of possibleConditions, recommendedActions, and a disclaimer.
 
-Bu projede kullanılan teknolojiler:
 
-- React
-- TypeScript
-- TailwindCSS
-- OpenAI API
-- React Router
-- Axios
-- Framer Motion
-- React Icons
+Getting Started
+Prerequisites
+	•	Node.js and npm installed.
+	•	A Firebase account with Authentication and Firestore enabled.
+	•	An OpenAI API key with access to fine-tuned models.
+Installation
+	1	Clone the repositoryBashgit clone https://github.com/yourusername/health-care-ai-assistant.git
+	2	cd health-care-ai-assistant
+	3	
+	4	Install dependenciesBashnpm install
+	5	
+	6	Environment VariablesCreate a .env file in the root directory and add your API keys securely:Kod snippet'iREACT_APP_FIREBASE_API_KEY=your_firebase_api_key
+	7	REACT_APP_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+	8	REACT_APP_FIREBASE_PROJECT_ID=your_firebase_project_id
+	9	REACT_APP_OPENAI_API_KEY=your_openai_api_key
+	10	REACT_APP_OPENAI_MODEL=ft:gpt-3.5-turbo:your-org:your-custom-model-id
+	11	
+	12	Run the development serverBashnpm start
+	13	
+Disclaimer
+This application functions as an initial educational resource and remains entirely separate from professional medical services. It is not a substitute for a real doctor and cannot provide medical diagnoses or treatments. Always consult a healthcare professional for medical concerns.
 
-## Kurulum
 
-Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyin:
-
-1. Node.js'i yükleyin (https://nodejs.org/)
-2. Bu repo'yu klonlayın:
-   ```
-   git clone https://github.com/kullaniciadi/saglik-asistani.git
-   ```
-3. Proje klasörüne gidin:
-   ```
-   cd saglik-asistani
-   ```
-4. Bağımlılıkları yükleyin:
-   ```
-   npm install
-   ```
-5. OpenAI API anahtarını ayarlayın:
-   - Projenin ana dizininde `.env` dosyası oluşturun
-   - Dosyaya şu satırı ekleyin (API anahtarınızı buraya yazın):
-     ```
-     REACT_APP_OPENAI_API_KEY=your_openai_api_key_here
-     ```
-6. Geliştirme sunucusunu başlatın:
-   ```
-   npm start
-   ```
-7. Tarayıcınızda http://localhost:3000 adresini açın
-
-## OpenAI API Anahtarı Edinme
-
-1. [OpenAI](https://platform.openai.com/) sitesine giriş yapın veya hesap oluşturun
-2. API anahtarları bölümüne gidin
-3. "Create new secret key" butonuna tıklayın
-4. Oluşturulan API anahtarını `.env` dosyasına ekleyin
-
-## Proje Yapısı
-
-```
-src/
-  ├── components/   # Tüm UI bileşenleri
-  ├── services/     # API servisleri
-  ├── assets/       # Görseller ve diğer statik dosyalar
-  ├── styles/       # CSS dosyaları
-  ├── App.tsx       # Ana uygulama bileşeni
-  └── index.tsx     # Giriş noktası
-```
-
-## Katkıda Bulunma
-
-1. Bu repo'yu fork edin
-2. Yeni bir branch oluşturun (`git checkout -b feature/amazing-feature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'Add some amazing feature'`)
-4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
-5. Pull Request açın
-
-## Lisans
-
-Bu proje MIT lisansı altında lisanslanmıştır - detaylar için [LICENSE](LICENSE) dosyasına bakın.
-
-## İletişim
-
-Proje Sahibi - [email@example.com](mailto:email@example.com)
-
-Proje Link: [https://github.com/kullaniciadi/saglik-asistani](https://github.com/kullaniciadi/saglik-asistani) 
+Author
+	•	Doğan Bilir - Computer Engineering, Çukurova University 
+	•	Advisor: Prof. Dr. Mehmet Fatih Akay 
